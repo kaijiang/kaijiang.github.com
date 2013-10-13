@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-想法就要付出实践
+想法就要付诸实践
 
 {% codeblock lang:c %}
 #include <stdio.h>
