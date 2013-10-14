@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>如何添加新浪微博转发功能 - Jiang Kai's Blog</title>
+  <title>Category: lessons - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="如何添加新浪微博转发功能 Oct 14th, 2013 | Comments 搭完整个blog的框架后，开始添加一些widget，首当其冲的就是新浪微博的转发功能。 新浪微博提供了开发平台，可以在其提供的接口下添加相应代码完成相应功能。添加微博转发功能到个人网站主要参考了微博分享按钮。 &hellip;">
+  <meta name="description" content="Category: lessons">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kaijiang.github.io/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">
+  <link rel="canonical" href="http://kaijiang.github.ioblog/categories/lessons/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,153 +76,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">如何添加新浪微博转发功能</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-14T02:58:00-07:00" pubdate data-updated="true">Oct 14<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Lessons</h1>
     
   </header>
-
-
-<div class="entry-content"><p>搭完整个blog的框架后，开始添加一些widget，首当其冲的就是新浪微博的转发功能。</p>
-
-<p>新浪微博提供了开发平台，可以在其提供的接口下添加相应代码完成相应功能。添加微博转发功能到个人网站主要参考了<a href="http://open.weibo.com/sharebutton">微博分享按钮</a>。</p>
-
-<p>在当前octopress框架下实现主要分以下几步：</p>
-
-<ul>
-<li>修改<code>_config.yml</code></li>
-</ul>
-
-
-<p>添加以下内容：</p>
-
-<pre><code># Sina weibo
-weibo_share_button: true
-</code></pre>
-
-<p>可方便在配置文件中进行功能开启关闭。</p>
-
-<!-- more -->
-
-
-<ul>
-<li>在source/_include/里添加一个html文件weibo.html</li>
-</ul>
-
-
-<p>添加内容：</p>
-
-<pre><code>% if site.weibo_share_button %
-&lt;html xmlns:wb="http://open.weibo.com/wb"&gt;
-&lt;script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;
-&lt;wb:share-button addition="number" type="button" default_text="来自jiangkai's blog" ralateUid="1639057585"&gt;&lt;/wb:share-button&gt;
-% endif %
-</code></pre>
-
-<p>第一行是XML命名空间，第二行为需要添加的js，第三行为WBML代码，定制转发微博相应动作。
-需要注意,default_text不能为空，否则点击转发图标后无法生成链接，ralateUid为转发该微博的时候会@的微博用户。</p>
-
-<ul>
-<li>修改source/_include/article.html</li>
-</ul>
-
-
-<p>在该行下</p>
-
-<pre><code>&lt;div class="entry-content"&gt;&lt;/div&gt;
-</code></pre>
-
-<p>添加</p>
-
-<pre><code>% include weibo.html %
-</code></pre>
-
-<p>这样在每篇blog的下方增加微博转发按钮。</p>
-
-<p>需要注意的是，在<a href="http://open.weibo.com/sharebutton">微博分享按钮</a>里的第二步非必须，除非有特定需要在微博中显示转发来源网页或者应用用于推广。</p>
-</div>
-
-  <html xmlns:wb="http://open.weibo.com/wb">
-  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
-  <wb:share-button addition="number" type="button" default_text="来自jiangkai's blog" ralateUid="1639057585"></wb:share-button>
-
-
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Jiang Kai</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2011</h2>
 
-
-<time datetime="2013-10-14T02:58:00-07:00" pubdate data-updated="true">Oct 14<span>th</span>, 2013</time>
-      
-
-<span class="categories">
+<article>
   
-    <a class='category' href='/blog/categories/blog/'>blog</a>
-  
-</span>
+<h1><a href="/blog/2011/12/29/jekyll-introduction/">Jekyll Introduction</a></h1>
+<time datetime="2011-12-29T00:00:00-08:00" pubdate><span class='month'>Dec</span> <span class='day'>29</span> <span class='year'>2011</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/lessons/'>lessons</a></span>
+</footer>
 
 
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/10/12/hello-world/" title="Previous Post: Hello World">&laquo; Hello World</a>
-      
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -314,10 +197,7 @@ weibo_share_button: true
       var disqus_shortname = 'jiangkai';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://kaijiang.github.io/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/';
-        var disqus_url = 'http://kaijiang.github.io/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
