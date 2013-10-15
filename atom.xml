@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Jiang Kai's Blog]]></title>
-  <link href="http://kaijiang.github.io/atom.xml" rel="self"/>
-  <link href="http://kaijiang.github.io/"/>
-  <updated>2013-10-15T02:06:56-07:00</updated>
-  <id>http://kaijiang.github.io/</id>
+  <link href="http://blog.jiang-kai.com/atom.xml" rel="self"/>
+  <link href="http://blog.jiang-kai.com/"/>
+  <updated>2013-10-15T02:41:23-07:00</updated>
+  <id>http://blog.jiang-kai.com/</id>
   <author>
     <name><![CDATA[Jiang Kai]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[如何添加新浪微博转发功能]]></title>
-    <link href="http://kaijiang.github.io/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/"/>
+    <link href="http://blog.jiang-kai.com/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/"/>
     <updated>2013-10-14T02:58:00-07:00</updated>
-    <id>http://kaijiang.github.io/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng</id>
+    <id>http://blog.jiang-kai.com/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng</id>
     <content type="html"><![CDATA[<p>搭完整个blog的框架后，开始添加一些widget，首当其冲的就是新浪微博的转发功能。</p>
 
 <p>新浪微博提供了开发平台，可以在其提供的接口下添加相应代码完成相应功能。添加微博转发功能到个人网站主要参考了<a href="http://open.weibo.com/sharebutton">微博分享按钮</a>。</p>
@@ -80,9 +80,9 @@ weibo_share_button: true
   
   <entry>
     <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://kaijiang.github.io/blog/2013/10/12/hello-world/"/>
+    <link href="http://blog.jiang-kai.com/blog/2013/10/12/hello-world/"/>
     <updated>2013-10-12T21:34:00-07:00</updated>
-    <id>http://kaijiang.github.io/blog/2013/10/12/hello-world</id>
+    <id>http://blog.jiang-kai.com/blog/2013/10/12/hello-world</id>
     <content type="html"><![CDATA[<p>想法就要付诸实践</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://kaijiang.github.io/sitemap.xml 
+Sitemap: http://blog.jiang-kai.com/sitemap.xml 

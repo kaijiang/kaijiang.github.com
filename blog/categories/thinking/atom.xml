@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: thinking | Jiang Kai's Blog]]></title>
-  <link href="http://kaijiang.github.io/blog/categories/thinking/atom.xml" rel="self"/>
-  <link href="http://kaijiang.github.io/"/>
-  <updated>2013-10-15T02:06:56-07:00</updated>
-  <id>http://kaijiang.github.io/</id>
+  <link href="http://blog.jiang-kai.com/blog/categories/thinking/atom.xml" rel="self"/>
+  <link href="http://blog.jiang-kai.com/"/>
+  <updated>2013-10-15T02:41:23-07:00</updated>
+  <id>http://blog.jiang-kai.com/</id>
   <author>
     <name><![CDATA[Jiang Kai]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://kaijiang.github.io/blog/2013/10/12/hello-world/"/>
+    <link href="http://blog.jiang-kai.com/blog/2013/10/12/hello-world/"/>
     <updated>2013-10-12T21:34:00-07:00</updated>
-    <id>http://kaijiang.github.io/blog/2013/10/12/hello-world</id>
+    <id>http://blog.jiang-kai.com/blog/2013/10/12/hello-world</id>
     <content type="html"><![CDATA[<p>想法就要付诸实践</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

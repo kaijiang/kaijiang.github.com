@@ -1,29 +1,29 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://kaijiang.github.io/blog/2013/10/12/hello-world/</loc>
+        <loc>http://blog.jiang-kai.com/blog/2013/10/12/hello-world/</loc>
         <lastmod>2013-10-14T01:46:52-07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://kaijiang.github.io/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/
+            http://blog.jiang-kai.com/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/
         </loc>
         <lastmod>2013-10-14T04:08:44-07:00</lastmod>
     </url>
     <url>
-        <loc>http://kaijiang.github.io/about/</loc>
+        <loc>http://blog.jiang-kai.com/about/</loc>
         <lastmod>2013-10-14T13:42:02-07:00</lastmod>
     </url>
     <url>
-        <loc>http://kaijiang.github.io/</loc>
+        <loc>http://blog.jiang-kai.com/</loc>
         <lastmod>2013-10-14T04:08:44-07:00</lastmod>
     </url>
     <url>
-        <loc>http://kaijiang.github.io/blog/archives/</loc>
+        <loc>http://blog.jiang-kai.com/blog/archives/</loc>
         <lastmod>2013-10-14T04:08:44-07:00</lastmod>
     </url>
     <url>
-        <loc>http://kaijiang.github.io/robots.txt</loc>
+        <loc>http://blog.jiang-kai.com/robots.txt</loc>
         <lastmod>2013-10-13T19:05:15-07:00</lastmod>
     </url>
 </urlset>
