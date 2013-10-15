@@ -11,24 +11,24 @@ footer: true
 Not some kind for nerd, I'm the king of nerds.
 {% endblockquote %}
 
-## Experience
+## Summary
 
-   **Software Engineer**       
-   
-   <a href="http://www.juniper.net" title="Juniper" target="blank"><img src="{{ root_url }}/images/Juniper.png"></img></a>
-   
-   *2013/08 - now*
-   
-   Working on user identification, which is one important feature of Next generation firewall, in juniper SBU platform&network service team, 
+    With strong technical background in network security, Intrusion Prevention systems, Next 
+    Generation Firewall etc.
+    Now working in Juniper Networks, which is a company leading the revolution in networking.
+    
+    Strong capabilities include:
 
-   **System Engineer**
-   
-   <a href="http://www.nsfocus.com" title="Nsfocus" target="blank"><img src="{{ root_url }}/images/Nsfocus.png"></img></a>   
-   
-   *2010/07 - 2013/08*
-   
-   Mainly focus on fast packet forwarding platform design and implement, lead the IPS team as technical leader.
-   
+    - Parallel/Multicore Programming
+    - Multithread/Multiprocess Programming
+    - Linux system(kernel, driver etc.)
+    - Fast packet forwarding platform framework(like intel dpdk)
+    
+    Skilled in C, C++, Python.
+    Self motivated, adaptable, fast-learner, have a great passion in new technology.
+ 
+** Be Geek, Be Happy **
+
 ## Where I AM
 
 <p>
