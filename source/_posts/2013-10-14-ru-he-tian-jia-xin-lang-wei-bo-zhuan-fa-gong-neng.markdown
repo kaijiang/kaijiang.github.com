@@ -28,7 +28,7 @@ categories: blog
     <wb:share-button addition="number" type="button" default_text="来自jiangkai's blog" ralateUid="1639057585"></wb:share-button>
     % endif %
 第一行是XML命名空间，第二行为需要添加的js，第三行为WBML代码，定制转发微博相应动作。
-需要注意,default_text不能为空，否则点击转发图标后无法生成链接，ralateUid为转发该微博的时候会@的微博用户。
+需要注意,default_text不为空，则转发的微博带上该默认文字，如果没有default_text的话，则转发的时候会自动抓取页面标题，ralateUid为转发该微博的时候会@的微博用户。
 
 * 修改source/_include/article.html
 
@@ -39,5 +39,5 @@ categories: blog
 
 这样在每篇blog的下方增加微博转发按钮。
 
-需要注意的是，在[微博分享按钮](http://open.weibo.com/sharebutton)里的第二步非必须，除非有特定需要在微博中显示转发来源网页或者应用用于推广。
+需要注意的是，在[微博分享按钮](http://open.weibo.com/sharebutton)里的第二步非必须，除非有需要在微博中显示转发来源网页或者应用用于推广，如果跳过网站或者应用上线并审核，那么分享的微博下方会显示来自分享按钮，否则会显示来自xxx网站或者应用。
 
