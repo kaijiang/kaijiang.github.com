@@ -13,12 +13,14 @@ Not some kind for nerd, I'm the king of nerds.
 
 ## Summary
 
-    With strong technical background in network security, Intrusion Prevention systems, Next 
-    Generation Firewall etc.
-    Now working in Juniper Networks, which is a company leading the revolution in networking.
+    I'm a back-end Linux/UNIX Developer with strong technical background in network security, 
+    Intrusion Prevention systems, Next Generation Firewall for about 5 years. 
+    
+    I graduated from Harbin Institute of Technology and got my master degree in 2010.
+    
+    Now I'm working in Juniper Networks, which is a company leading the revolution in networking.
     
     Strong capabilities include:
-
     - Parallel/Multicore Programming
     - Multithread/Multiprocess Programming
     - Linux system(kernel, driver etc.)
