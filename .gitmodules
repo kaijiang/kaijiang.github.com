@@ -7,3 +7,6 @@
 [submodule ".themes/classic-light"]
 	path = .themes/classic-light
 	url = git://github.com/octothemes/classic-light.git
+[submodule ".themes/light"]
+	path = .themes/light
+	url = git://github.com/octopress-themes/classic-light.git
