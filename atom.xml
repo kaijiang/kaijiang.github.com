@@ -4,7 +4,7 @@
   <title><![CDATA[Jiang Kai's Blog]]></title>
   <link href="http://blog.jiang-kai.com/atom.xml" rel="self"/>
   <link href="http://blog.jiang-kai.com/"/>
-  <updated>2013-10-15T13:03:47-07:00</updated>
+  <updated>2013-10-16T03:50:21-07:00</updated>
   <id>http://blog.jiang-kai.com/</id>
   <author>
     <name><![CDATA[Jiang Kai]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[添加新浪微博api接口的总结]]></title>
+    <link href="http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/"/>
+    <updated>2013-10-15T15:00:00-07:00</updated>
+    <id>http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie</id>
+    <content type="html"><![CDATA[<p>我的博客主要用了<a href="http://open.weibo.com">新浪微博开放平台</a>提供的三种api接口：分享按钮，微博发布窗，微博秀。
+<a href="http://open.weibo.com/widget/publisher.php">微博发布窗</a>和<a href="http://app.weibo.com/tool/weiboshow">微博秀</a>放在博客的asides里，代码由上面链接中自动提供，在<code>source/_include/asides/weibo.html</code>里加入即可。分享按钮的添加方式在<a href="http://blog.jiang-kai.com/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">上一篇博客</a>中有详细描述。</p>
+
+<p>完成上述代码添加后，即可在博客界面上查看特定微博，发送微博，转发微博操作，但是这样会有一个问题，转发微博后展示页面左下方来源会显示<code>来自分享按钮</code>，发送微博后显示<code>来自未经审核应用</code>，这是因为新浪微博会为每个接入网站或者应用提供一个appkey，如果网站或者应用没有经过新浪的审核，则会有如上显示。</p>
+
+<p>解决这个问题的方法就是在<a href="http://open.weibo.com">新浪微博开放平台</a>中进行三步认证（手续极具中国特色，但相对来说新浪效率还是不错的），首先是填写开发者资料，各种个人信息和联系方式等，审核过了以后需要提供身份认证，主要就是上传身份证照片，提供身份证号，实名登记，哎~~，经过大致一天审核后，就可以添加自己的网站或应用了。在<a href="http://open.weibo.com/webmaster/add">添加新网站</a>界面填写信息，网站名称和域名，域名一定要是网站根域名，否则会给后面带来麻烦。另外需要在自己的界面中增加如下代码来经过审核：</p>
+
+<pre><code>&lt;meta property="wb:webmaster" content="xxxxxx" /&gt;
+</code></pre>
+
+<!--more-->
+
+
+<p>  <br/>
+完成上述步骤后，进入最后一步网站或者应用审核了，也是最麻烦的一步，由于国情的原因，除了填写网站名称，域名，介绍等基本信息，还需要提供ISP备案信息（damn it！），大部分人走到这步心里估计就放弃了，个人站点博客之类的哪儿会去备案呢，何况是VPS，虚拟云主机或者干脆是Github托管，不过新浪厚道的提供了一个选项，站点是国内还是国外的，国内的需要ISP备案，国外的话不需要备案信息，但是需要提供一个海外网站证明扫描件，开始一头雾水，不知到这个证明是什么，不过在<a href="http://open.weibo.com/qa">微博开放平台问答</a>搜索下，会发现其实只要提供一个国际顶级域名注册证书即可，比如(<a href="http://www.now.cn/domain/cer.net?IDDomain=11888448">http://www.now.cn/domain/cer.net?IDDomain=11888448</a>)，这个证书在申请域名的提供商那里可以获得，比如我在<a href="http://www.ename.com">易名中国</a>注册的域名，在域名管理页面中提供域名证书功能，直接截图上传审核即可。</p>
+
+<p>审核时间大致在大半天到一天左右，效率还是不错的，通过审核后，就正式可以接入微博了，在博客页面发布微博或者转发微博都会显示来源为XXX网站（名字为审核时填写的网站名称）。</p>
+
+<p>不过在放置分享按钮时出现点小问题，一直都只能显示来自分享按钮，无法显示来自xxx网站，后面提取url一点点的debug发现新浪自动生成的appkey是经过编码的，可能是因为安全或者其他考虑，没有显示appkey明文，但是编码过的appkey就会带来上述问题，必须将代码中的appkey改成明文才能带来预想效果。</p>
+
+<p>最后，如果你没有强迫症或者某种装X需要:),显示<code>来自未审核应用</code>也是可接受的，也就省去了上面麻烦令人崩溃的步骤。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何添加新浪微博转发功能]]></title>

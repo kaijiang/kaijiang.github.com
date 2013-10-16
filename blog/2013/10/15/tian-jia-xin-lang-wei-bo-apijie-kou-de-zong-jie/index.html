@@ -7,12 +7,12 @@
 <head>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3368651352" type="text/javascript" charset="utf-8"></script>
   <meta charset="utf-8">
-  <title>Jiang Kai's Blog</title>
+  <title>添加新浪微博api接口的总结 - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="我的博客主要用了新浪微博开放平台提供的三种api接口：分享按钮，微博发布窗，微博秀。
-微博发布窗和微博秀放在博客的asides里，代码由上面链接中自动提供，在source/_include/asides/weibo.html里加入即可。分享按钮的添加方式在上一篇博客中有详细描述。 &hellip;">
+  <meta name="description" content="添加新浪微博api接口的总结 Oct 15th, 2013 | Comments 我的博客主要用了新浪微博开放平台提供的三种api接口：分享按钮，微博发布窗，微博秀。
+微博发布窗和微博秀放在博客的asides里，代码由上面链接中自动提供，在source/_include/asides/weibo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.jiang-kai.com/">
+  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,15 +78,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/">添加新浪微博api接口的总结</a></h1>
+      <h1 class="entry-title">添加新浪微博api接口的总结</h1>
     
     
       <p class="meta">
@@ -104,14 +101,14 @@
 
 <time datetime="2013-10-15T15:00:00-07:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>我的博客主要用了<a href="http://open.weibo.com">新浪微博开放平台</a>提供的三种api接口：分享按钮，微博发布窗，微博秀。
+<div class="entry-content"><p>我的博客主要用了<a href="http://open.weibo.com">新浪微博开放平台</a>提供的三种api接口：分享按钮，微博发布窗，微博秀。
 <a href="http://open.weibo.com/widget/publisher.php">微博发布窗</a>和<a href="http://app.weibo.com/tool/weiboshow">微博秀</a>放在博客的asides里，代码由上面链接中自动提供，在<code>source/_include/asides/weibo.html</code>里加入即可。分享按钮的添加方式在<a href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">上一篇博客</a>中有详细描述。</p>
 
 <p>完成上述代码添加后，即可在博客界面上查看特定微博，发送微博，转发微博操作，但是这样会有一个问题，转发微博后展示页面左下方来源会显示<code>来自分享按钮</code>，发送微博后显示<code>来自未经审核应用</code>，这是因为新浪微博会为每个接入网站或者应用提供一个appkey，如果网站或者应用没有经过新浪的审核，则会有如上显示。</p>
@@ -121,87 +118,32 @@
 <pre><code>&lt;meta property="wb:webmaster" content="xxxxxx" /&gt;
 </code></pre>
 
+<!--more-->
+
+
+<p>  <br/>
+完成上述步骤后，进入最后一步网站或者应用审核了，也是最麻烦的一步，由于国情的原因，除了填写网站名称，域名，介绍等基本信息，还需要提供ISP备案信息（damn it！），大部分人走到这步心里估计就放弃了，个人站点博客之类的哪儿会去备案呢，何况是VPS，虚拟云主机或者干脆是Github托管，不过新浪厚道的提供了一个选项，站点是国内还是国外的，国内的需要ISP备案，国外的话不需要备案信息，但是需要提供一个海外网站证明扫描件，开始一头雾水，不知到这个证明是什么，不过在<a href="http://open.weibo.com/qa">微博开放平台问答</a>搜索下，会发现其实只要提供一个国际顶级域名注册证书即可，比如(<a href="http://www.now.cn/domain/cer.net?IDDomain=11888448">http://www.now.cn/domain/cer.net?IDDomain=11888448</a>)，这个证书在申请域名的提供商那里可以获得，比如我在<a href="http://www.ename.com">易名中国</a>注册的域名，在域名管理页面中提供域名证书功能，直接截图上传审核即可。</p>
+
+<p>审核时间大致在大半天到一天左右，效率还是不错的，通过审核后，就正式可以接入微博了，在博客页面发布微博或者转发微博都会显示来源为XXX网站（名字为审核时填写的网站名称）。</p>
+
+<p>不过在放置分享按钮时出现点小问题，一直都只能显示来自分享按钮，无法显示来自xxx网站，后面提取url一点点的debug发现新浪自动生成的appkey是经过编码的，可能是因为安全或者其他考虑，没有显示appkey明文，但是编码过的appkey就会带来上述问题，必须将代码中的appkey改成明文才能带来预想效果。</p>
+
+<p>最后，如果你没有强迫症或者某种装X需要:),显示<code>来自未审核应用</code>也是可接受的，也就省去了上面麻烦令人崩溃的步骤。</p>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/">Read More&#8230;</a>
-    </footer>
-  
+
+  <wb:share-button appkey="3368651352" addition="simple" type="button" ralateUid="1639057585"></wb:share-button>
 
 
-    </article>
-  
-  
-    <article>
+
+
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">如何添加新浪微博转发功能</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Jiang Kai</span></span>
 
-<time datetime="2013-10-14T02:58:00-07:00" pubdate data-updated="true">Oct 14<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>搭完整个blog的框架后，开始添加一些widget，首当其冲的就是新浪微博的转发功能。</p>
-
-<p>新浪微博提供了开发平台，可以在其提供的接口下添加相应代码完成相应功能。添加微博转发功能到个人网站主要参考了<a href="http://open.weibo.com/sharebutton">微博分享按钮</a>。</p>
-
-<p>在当前octopress框架下实现主要分以下几步：</p>
-
-<ul>
-<li>修改<code>_config.yml</code></li>
-</ul>
-
-
-<p>添加以下内容：</p>
-
-<pre><code># Sina weibo
-weibo_share_button: true
-</code></pre>
-
-<p>可方便在配置文件中进行功能开启关闭。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">Read More&#8230;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/12/hello-world/">Hello World</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -213,48 +155,42 @@ weibo_share_button: true
   
 
 
-<time datetime="2013-10-12T21:34:00-07:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/12/hello-world/#disqus_thread">Comments</a>
-        
-      </p>
+<time datetime="2013-10-15T15:00:00-07:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/blog/'>blog</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  
+  
+</div>
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/" title="Previous Post: 如何添加新浪微博转发功能">&laquo; 如何添加新浪微博转发功能</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-  <div class="entry-content"><p>想法就要付诸实践</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -287,7 +223,7 @@ weibo_share_button: true
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/kaijiang">@kaijiang</a> on GitHub
@@ -335,6 +271,7 @@ weibo_share_button: true
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -349,7 +286,10 @@ weibo_share_button: true
       var disqus_shortname = 'jiangkai';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/';
+        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
