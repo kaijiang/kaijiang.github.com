@@ -8,7 +8,7 @@ footer: true
 ---
 
 {% blockquote Sheldon Cooper, The Big Bang. %}
-Not some kind for nerd, I'm the king of nerds.
+Not some kind of nerd, I'm the king of nerds.
 {% endblockquote %}
 
 ## Summary
