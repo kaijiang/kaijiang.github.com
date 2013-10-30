@@ -4,7 +4,7 @@
   <title><![CDATA[Jiang Kai's Blog]]></title>
   <link href="http://blog.jiang-kai.com/atom.xml" rel="self"/>
   <link href="http://blog.jiang-kai.com/"/>
-  <updated>2013-10-16T03:55:23-07:00</updated>
+  <updated>2013-10-29T21:26:23-07:00</updated>
   <id>http://blog.jiang-kai.com/</id>
   <author>
     <name><![CDATA[Jiang Kai]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何加速emacs cscope查询速度]]></title>
+    <link href="http://blog.jiang-kai.com/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/"/>
+    <updated>2013-10-29T02:51:00-07:00</updated>
+    <id>http://blog.jiang-kai.com/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du</id>
+    <content type="html"><![CDATA[<p>emacs + cscope对于小项目来说速度还不错，但是对于动不动几百兆甚至上G的源代码，速度明显超出忍受范围，由于工作原因，项目代码较多，在emacs下用cscope C-s s s搜索symbol速度慢得几乎无法忍受，需要100s以上，后来搜索下了资料并且观察了下cscope命令行参数以及cscope-indexer脚本，发现可以采用两个步骤就能加速上百倍搜索性能:</p>
+
+<ol>
+<li>不要让emacs边搜索边更新</li>
+</ol>
+
+
+<p>cscope默认在每次进行查找时更新cscope.out。当工程十分庞大时，建议关闭该选项以提高查找速度。方法是在~/.emacs文件中加入</p>
+
+<pre><code>(setq cscope-do-not-update-database t)    
+</code></pre>
+
+<ol>
+<li>cscope建立反向索引</li>
+</ol>
+
+
+<p>cscope参数中-q可以建立反向索引来加速搜索，但是默认的cscope-indexer没有开启这个功能，因此需要修改默认的cscope-indexer脚本，把</p>
+
+<pre><code>cscope -b -i $LIST_FILE -f $DATABASE_FILE
+</code></pre>
+
+<p>替换为</p>
+
+<pre><code>cscope -q -b -i $LIST_FILE -f $DATABASE_FILE
+</code></pre>
+
+<p>然后删掉cscope相关文件，重新生成，再试一次，搜索时间基本上就稳定在1s以内了！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何在宏定义中计算柔性数组元素大小]]></title>
+    <link href="http://blog.jiang-kai.com/blog/2013/10/25/code-tricks-1/"/>
+    <updated>2013-10-25T11:28:00-07:00</updated>
+    <id>http://blog.jiang-kai.com/blog/2013/10/25/code-tricks-1</id>
+    <content type="html"><![CDATA[
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;inttypes.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;string.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;netinet/in.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_id_list</span><span class="p">{</span>
+</span><span class='line'>    <span class="kt">uint16_t</span> <span class="n">n</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">uint16_t</span> <span class="n">uid</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">uint16_t</span> <span class="n">elts</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span> <span class="n">id_list_t</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define MAX_ELEM 10</span>
+</span><span class='line'><span class="cp">#define MAX_LEN sizeof(id_list_t) + MAX_ELEM * sizeof(((id_list_t *)0)-&gt;elts[0])</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>    <span class="kt">uint8_t</span> <span class="n">id_list_buf</span><span class="p">[</span><span class="n">MAX_LEN</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">memset</span><span class="p">(</span><span class="n">id_list_buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MAX_LEN</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">uint16_t</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">id_list_t</span> <span class="o">*</span> <span class="n">p_id_list</span> <span class="o">=</span> <span class="p">(</span><span class="n">id_list_t</span> <span class="o">*</span><span class="p">)</span><span class="n">id_list_buf</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">p_id_list</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">MAX_ELEM</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">p_id_list</span><span class="o">-&gt;</span><span class="n">uid</span> <span class="o">=</span> <span class="mi">257</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_ELEM</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>        <span class="n">p_id_list</span><span class="o">-&gt;</span><span class="n">elts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;MAX_LEN = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">MAX_LEN</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_LEN</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">){</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">id_list_buf</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[添加新浪微博api接口的总结]]></title>

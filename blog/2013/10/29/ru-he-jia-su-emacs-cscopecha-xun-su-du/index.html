@@ -7,11 +7,11 @@
 <head>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3368651352" type="text/javascript" charset="utf-8"></script>
   <meta charset="utf-8">
-  <title>Category: blog - Jiang Kai's Blog</title>
+  <title>如何加速emacs cscope查询速度 - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="Category: blog">
+  <meta name="description" content="如何加速emacs Cscope查询速度 Oct 29th, 2013 | Comments emacs + cscope对于小项目来说速度还不错，但是对于动不动几百兆甚至上G的源代码，速度明显超出忍受范围，由于工作原因，项目代码较多，在emacs下用cscope C-s s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.jiang-kai.comblog/categories/blog/">
+  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,50 +78,122 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Blog</h1>
+    
+      <h1 class="entry-title">如何加速emacs Cscope查询速度</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T02:51:00-07:00" pubdate data-updated="true">Oct 29<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>emacs + cscope对于小项目来说速度还不错，但是对于动不动几百兆甚至上G的源代码，速度明显超出忍受范围，由于工作原因，项目代码较多，在emacs下用cscope C-s s s搜索symbol速度慢得几乎无法忍受，需要100s以上，后来搜索下了资料并且观察了下cscope命令行参数以及cscope-indexer脚本，发现可以采用两个步骤就能加速上百倍搜索性能:</p>
 
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/">添加新浪微博api接口的总结</a></h1>
-<time datetime="2013-10-15T15:00:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>15</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/blog/'>blog</a></span>
-</footer>
+<ol>
+<li>不要让emacs边搜索边更新</li>
+</ol>
 
 
-</article>
+<p>cscope默认在每次进行查找时更新cscope.out。当工程十分庞大时，建议关闭该选项以提高查找速度。方法是在~/.emacs文件中加入</p>
+
+<pre><code>(setq cscope-do-not-update-database t)    
+</code></pre>
+
+<ol>
+<li>cscope建立反向索引</li>
+</ol>
 
 
+<p>cscope参数中-q可以建立反向索引来加速搜索，但是默认的cscope-indexer没有开启这个功能，因此需要修改默认的cscope-indexer脚本，把</p>
 
-<article>
-  
-<h1><a href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">如何添加新浪微博转发功能</a></h1>
-<time datetime="2013-10-14T02:58:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>14</span> <span class='year'>2013</span></time>
+<pre><code>cscope -b -i $LIST_FILE -f $DATABASE_FILE
+</code></pre>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/blog/'>blog</a></span>
-</footer>
+<p>替换为</p>
 
+<pre><code>cscope -q -b -i $LIST_FILE -f $DATABASE_FILE
+</code></pre>
 
-</article>
-
+<p>然后删掉cscope相关文件，重新生成，再试一次，搜索时间基本上就稳定在1s以内了！</p>
 </div>
 
+  <wb:share-button appkey="3368651352" addition="simple" type="button" ralateUid="1639057585"></wb:share-button>
+
+
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Jiang Kai</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T02:51:00-07:00" pubdate data-updated="true">Oct 29<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/emacs/'>emacs</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/25/code-tricks-1/" title="Previous Post: 如何在宏定义中计算柔性数组元素大小">&laquo; 如何在宏定义中计算柔性数组元素大小</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -230,7 +302,10 @@
       var disqus_shortname = 'jiangkai';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/';
+        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
