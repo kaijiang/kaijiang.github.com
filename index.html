@@ -11,7 +11,7 @@
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="emacs + cscope对于小项目来说速度还不错，但是对于动不动几百兆甚至上G的源代码，速度明显超出忍受范围，由于工作原因，项目代码较多，在emacs下用cscope C-s s s搜索symbol速度慢得几乎无法忍受，需要100s以上， &hellip;">
+  <meta name="description" content="各个编辑器之间最大的问题就是格式不统一，经常这边格式改的挺好，在另外一个编辑器里打开就又不对齐了，归结到最重要的一个问题就是TAB的不统一，有的编辑器默认TAB是4，有的是8，有的是6&hellip;. 解决这个问题的方法就是强制用空格来替代TAB，这样就解决了编辑器之间不统一的问题， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/">Emacs缩进格式问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-01T01:16:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>各个编辑器之间最大的问题就是格式不统一，经常这边格式改的挺好，在另外一个编辑器里打开就又不对齐了，归结到最重要的一个问题就是TAB的不统一，有的编辑器默认TAB是4，有的是8，有的是6&hellip;.  <br/>
+解决这个问题的方法就是强制用空格来替代TAB，这样就解决了编辑器之间不统一的问题，只要同一种格式在各种编辑器打开都是统一风格了。  <br/>
+emacs解决这个问题的方法就是将<code>indent-tabs-mode</code>这个变量设置为无效就行。正确的设置方式如下:</p>
+
+<pre><code>(defconst mystyle
+  '(......)
+  "mystyle" )
+(c-add-style "mystyle" mystyle)
+(defun myhook()
+  (setq indent-tabs-mode nil)
+  (c-set-style "mystyle"))
+(add-hook 'c++-mode-hook 'myhook
+</code></pre>
+
+<p>改完后世界终于清净了！</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -427,7 +479,7 @@ weibo_share_button: true
   <ul id="categories">
     <li class='category'><a href='/blog/categories/blog/'>blog (2)</a></li>
 <li class='category'><a href='/blog/categories/code/'>code (1)</a></li>
-<li class='category'><a href='/blog/categories/emacs/'>emacs (1)</a></li>
+<li class='category'><a href='/blog/categories/emacs/'>emacs (2)</a></li>
 <li class='category'><a href='/blog/categories/thinking/'>thinking (1)</a></li>
 
   </ul>
@@ -435,6 +487,10 @@ weibo_share_button: true
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/">emacs缩进格式问题</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/">如何加速emacs cscope查询速度</a>
@@ -450,10 +506,6 @@ weibo_share_button: true
     
       <li class="post">
         <a href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">如何添加新浪微博转发功能</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/12/hello-world/">Hello World</a>
       </li>
     
   </ul>

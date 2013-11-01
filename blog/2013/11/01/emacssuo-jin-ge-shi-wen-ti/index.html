@@ -7,11 +7,11 @@
 <head>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3368651352" type="text/javascript" charset="utf-8"></script>
   <meta charset="utf-8">
-  <title>Category: emacs - Jiang Kai's Blog</title>
+  <title>emacs缩进格式问题 - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="Category: emacs">
+  <meta name="description" content="Emacs缩进格式问题 Nov 1st, 2013 | Comments 各个编辑器之间最大的问题就是格式不统一，经常这边格式改的挺好，在另外一个编辑器里打开就又不对齐了，归结到最重要的一个问题就是TAB的不统一，有的编辑器默认TAB是4，有的是8，有的是6&hellip;. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.jiang-kai.comblog/categories/emacs/">
+  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,50 +78,109 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Emacs</h1>
+    
+      <h1 class="entry-title">Emacs缩进格式问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-01T01:16:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>各个编辑器之间最大的问题就是格式不统一，经常这边格式改的挺好，在另外一个编辑器里打开就又不对齐了，归结到最重要的一个问题就是TAB的不统一，有的编辑器默认TAB是4，有的是8，有的是6&hellip;.  <br/>
+解决这个问题的方法就是强制用空格来替代TAB，这样就解决了编辑器之间不统一的问题，只要同一种格式在各种编辑器打开都是统一风格了。  <br/>
+emacs解决这个问题的方法就是将<code>indent-tabs-mode</code>这个变量设置为无效就行。正确的设置方式如下:</p>
 
-  
-  <h2>2013</h2>
+<pre><code>(defconst mystyle
+  '(......)
+  "mystyle" )
+(c-add-style "mystyle" mystyle)
+(defun myhook()
+  (setq indent-tabs-mode nil)
+  (c-set-style "mystyle"))
+(add-hook 'c++-mode-hook 'myhook
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/">emacs缩进格式问题</a></h1>
-<time datetime="2013-11-01T01:16:00-07:00" pubdate><span class='month'>Nov</span> <span class='day'>01</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/emacs/'>emacs</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/">如何加速emacs cscope查询速度</a></h1>
-<time datetime="2013-10-29T02:51:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>29</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/emacs/'>emacs</a></span>
-</footer>
-
-
-</article>
-
+<p>改完后世界终于清净了！</p>
 </div>
 
+  <wb:share-button appkey="3368651352" addition="simple" type="button" ralateUid="1639057585"></wb:share-button>
+
+
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Jiang Kai</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-01T01:16:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/emacs/'>emacs</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/" title="Previous Post: 如何加速emacs cscope查询速度">&laquo; 如何加速emacs cscope查询速度</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -230,7 +289,10 @@
       var disqus_shortname = 'jiangkai';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/';
+        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
