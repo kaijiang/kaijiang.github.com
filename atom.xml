@@ -4,7 +4,7 @@
   <title><![CDATA[Jiang Kai's Blog]]></title>
   <link href="http://blog.jiang-kai.com/atom.xml" rel="self"/>
   <link href="http://blog.jiang-kai.com/"/>
-  <updated>2013-12-06T02:40:55-08:00</updated>
+  <updated>2013-12-06T03:53:06-08:00</updated>
   <id>http://blog.jiang-kai.com/</id>
   <author>
     <name><![CDATA[Jiang Kai]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[比较geek的strcmp实现]]></title>
+    <link href="http://blog.jiang-kai.com/blog/2013/12/06/bi-jiao-geekde-strcmpshi-xian/"/>
+    <updated>2013-12-06T03:47:00-08:00</updated>
+    <id>http://blog.jiang-kai.com/blog/2013/12/06/bi-jiao-geekde-strcmpshi-xian</id>
+    <content type="html"><![CDATA[<p>自己好玩实现了个strcmp，和string.h里面的strcmp返回值一致。</p>
+
+<p>比较geek的地方在类似my_strcmp(&ldquo;com&rdquo;,&ldquo;computer&rdquo;)的时候程序的执行流程还有最后返回值那块。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="nf">my_strcmp</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="n">str2</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">assert</span><span class="p">(</span><span class="n">str1</span> <span class="o">&amp;&amp;</span> <span class="n">str2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">ret</span> <span class="o">=</span> <span class="o">*</span><span class="n">str1</span> <span class="o">-</span> <span class="o">*</span><span class="n">str2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">str1</span><span class="o">++</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">str2</span><span class="o">++</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="o">!!</span><span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[单链表反转]]></title>

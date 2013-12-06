@@ -7,11 +7,11 @@
 <head>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3368651352" type="text/javascript" charset="utf-8"></script>
   <meta charset="utf-8">
-  <title>Category: thinking - Jiang Kai's Blog</title>
+  <title>比较geek的strcmp实现 - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="Category: thinking">
+  <meta name="description" content="比较geek的strcmp实现 Dec 6th, 2013 | Comments 自己好玩实现了个strcmp，和string.h里面的strcmp返回值一致。 比较geek的地方在类似my_strcmp(&ldquo;com&rdquo;,&ldquo;computer&rdquo;) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.jiang-kai.comblog/categories/thinking/">
+  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/12/06/bi-jiao-geekde-strcmpshi-xian/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,36 +78,116 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Thinking</h1>
+    
+      <h1 class="entry-title">比较geek的strcmp实现</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-06T03:47:00-08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>自己好玩实现了个strcmp，和string.h里面的strcmp返回值一致。</p>
 
-  
-  <h2>2013</h2>
+<p>比较geek的地方在类似my_strcmp(&ldquo;com&rdquo;,&ldquo;computer&rdquo;)的时候程序的执行流程还有最后返回值那块。</p>
 
-<article>
-  
-<h1><a href="/blog/2013/10/12/hello-world/">Hello World</a></h1>
-<time datetime="2013-10-12T21:34:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>12</span> <span class='year'>2013</span></time>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="nf">my_strcmp</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="n">str2</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">assert</span><span class="p">(</span><span class="n">str1</span> <span class="o">&amp;&amp;</span> <span class="n">str2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">ret</span> <span class="o">=</span> <span class="o">*</span><span class="n">str1</span> <span class="o">-</span> <span class="o">*</span><span class="n">str2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">str1</span><span class="o">++</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">str2</span><span class="o">++</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="o">!!</span><span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/thinking/'>thinking</a></span>
-</footer>
 
-
-</article>
 
 </div>
 
+  <wb:share-button appkey="3368651352" addition="simple" type="button" ralateUid="1639057585"></wb:share-button>
+
+
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Jiang Kai</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-06T03:47:00-08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/12/06/lian-biao-fan-zhuan/" title="Previous Post: 单链表反转">&laquo; 单链表反转</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -216,7 +296,10 @@
       var disqus_shortname = 'jiangkai';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/12/06/bi-jiao-geekde-strcmpshi-xian/';
+        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/12/06/bi-jiao-geekde-strcmpshi-xian/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
