@@ -7,11 +7,23 @@
 <head>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3368651352" type="text/javascript" charset="utf-8"></script>
   <meta charset="utf-8">
-  <title>Jiang Kai's Blog</title>
+  <title>单链表反转 - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="Not some kind of nerd, I&#8217;m the king of nerds.Sheldon Cooper The Big Bang. Summary I'm a back-end Linux/UNIX Developer with strong technical &hellip;">
+  <meta name="description" content="单链表反转 Dec 6th, 2013 | Comments 闲的没事实现了一个单链表反转，不知道还有没有更优雅点的实现，类似linus:利用二级指针删除单向链表这种牛逼的实现。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+node *list_reverse(node *head &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.jiang-kai.com/about/">
+  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/12/06/lian-biao-fan-zhuan/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,46 +90,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
-  <blockquote><p>Not some kind of nerd, I&#8217;m the king of nerds.</p><footer><strong>Sheldon Cooper</strong> <cite>The Big Bang.</cite></footer></blockquote>
-
-
-<h2>Summary</h2>
-
-<pre><code>I'm a back-end Linux/UNIX Developer with strong technical background in network security, 
-Intrusion Prevention systems, Next Generation Firewall for about 5 years. 
-
-I graduated from Harbin Institute of Technology and got my master degree in 2010.
-
-Now I'm working in Juniper Networks, which is a company leading the revolution in networking.
-
-Strong capabilities include:
-- Parallel/Multicore Programming
-- Multithread/Multiprocess Programming
-- Linux system(kernel, driver etc.)
-- Fast packet forwarding platform framework(like intel dpdk)
-
-Skilled in C, C++, Python.
-Self motivated, adaptable, fast-learner, have a great passion in new technology.
-</code></pre>
-
-<p><strong> Be Geek, Be Happy </strong></p>
-
-<h2>Where I AM</h2>
-
-<p>
-<a href="https://github.com/kaijiang" title="GitHub" target="blank"><img src="/images/GitHub.png" height="34" weigth="34" style="border:0"></img></a>
-<a href="http://www.linkedin.com/profile/view?id=194851452" title="Linkedin" target="blank"><img src="/images/Linkedin.png" height="34" weigth="34" style="border:0"></img></a>
-<a href="http://weibo.com/jackboy" title="weibo" target="blank"><img src="/images/Weibo.png" height="34" weigth="34" style="border:0"></img></a>
-</p>
-
-
-  
-    <footer>
+  <header>
+    
+      <h1 class="entry-title">单链表反转</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -129,19 +110,97 @@ Self motivated, adaptable, fast-learner, have a great passion in new technology.
   
 
 
-<time datetime="2013-10-13T07:44:00-07:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+<time datetime="2013-12-06T02:31:00-08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>闲的没事实现了一个单链表反转，不知道还有没有更优雅点的实现，类似<a href="http://coolshell.cn/articles/8990.html">linus:利用二级指针删除单向链表</a>这种牛逼的实现。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">node</span> <span class="o">*</span><span class="nf">list_reverse</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">node</span> <span class="o">*</span><span class="n">prev</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">*</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">head</span><span class="p">){</span>
+</span><span class='line'>        <span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">prev</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">head</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="cm">/*return new head*/</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">prev</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+  <wb:share-button appkey="3368651352" addition="simple" type="button" ralateUid="1639057585"></wb:share-button>
+
+
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jiang Kai</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-06T02:31:00-08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/" title="Previous Post: emacs缩进格式问题">&laquo; emacs缩进格式问题</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
   <section>
@@ -258,8 +317,8 @@ Self motivated, adaptable, fast-learner, have a great passion in new technology.
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.jiang-kai.com/about/index.html';
-        var disqus_url = 'http://blog.jiang-kai.com/about/index.html';
+        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/12/06/lian-biao-fan-zhuan/';
+        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/12/06/lian-biao-fan-zhuan/';
         var disqus_script = 'embed.js';
       
     (function () {
