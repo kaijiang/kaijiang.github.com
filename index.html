@@ -11,14 +11,21 @@
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="自己好玩实现了个strcmp，和string.h里面的strcmp返回值一致。 比较geek的地方在类似my_strcmp(&ldquo;com&rdquo;,&ldquo;computer&rdquo;)的时候程序的执行流程还有最后返回值那块。 1
+  <meta name="description" content="在用python的ElementTree处理xml文件的时候，有一个问题比较烦人： 当你的xml文件里有注释的时候，调用ElementTree.write()的时候会把注释去掉后保存，对于这种情况，需要加入以下代码进行处理： 1
 2
 3
 4
 5
 6
 7
-int &hellip;">
+8
+9
+10
+11
+12
+13
+14
+15 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +93,82 @@ int &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/">Python ElementTree如何处理xml文件中的注释</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T02:25:00-08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在用python的ElementTree处理xml文件的时候，有一个问题比较烦人：  <br/>
+当你的xml文件里有注释的时候，调用ElementTree.write()的时候会把注释去掉后保存，对于这种情况，需要加入以下代码进行处理：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CommentParser</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">XMLTreeBuilder</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">ET</span><span class="o">.</span><span class="n">XMLTreeBuilder</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span class='line'>        <span class="c"># assumes ElementTree 1.2.X</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_parser</span><span class="o">.</span><span class="n">CommentHandler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_comment</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">handle_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">Comment</span><span class="p">,</span> <span class="p">{})</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">Comment</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">CommentParser</span><span class="p">())</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本质上就是在调用ElementTree.parser()的时候，传入处理comment的handler，方法其实就是ElementTree.Comment()，不知道什么时候ElementTree的版本能自己加入啊。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -611,7 +694,7 @@ weibo_share_button: true
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/blog/'>blog (2)</a></li>
-<li class='category'><a href='/blog/categories/code/'>code (3)</a></li>
+<li class='category'><a href='/blog/categories/code/'>code (4)</a></li>
 <li class='category'><a href='/blog/categories/emacs/'>emacs (2)</a></li>
 <li class='category'><a href='/blog/categories/thinking/'>thinking (1)</a></li>
 
@@ -620,6 +703,10 @@ weibo_share_button: true
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/">python ElementTree如何处理xml文件中的注释</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/12/06/bi-jiao-geekde-strcmpshi-xian/">比较geek的strcmp实现</a>
@@ -635,10 +722,6 @@ weibo_share_button: true
     
       <li class="post">
         <a href="/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/">如何加速emacs cscope查询速度</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/25/code-tricks-1/">如何在宏定义中计算柔性数组元素大小</a>
       </li>
     
   </ul>

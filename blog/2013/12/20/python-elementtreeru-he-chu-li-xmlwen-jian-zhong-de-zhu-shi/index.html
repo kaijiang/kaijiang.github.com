@@ -7,12 +7,11 @@
 <head>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3368651352" type="text/javascript" charset="utf-8"></script>
   <meta charset="utf-8">
-  <title>添加新浪微博api接口的总结 - Jiang Kai's Blog</title>
+  <title>python ElementTree如何处理xml文件中的注释 - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="添加新浪微博api接口的总结 Oct 15th, 2013 | Comments 我的博客主要用了新浪微博开放平台提供的三种api接口：分享按钮，微博发布窗，微博秀。
-微博发布窗和微博秀放在博客的asides里，代码由上面链接中自动提供，在source/_include/asides/weibo &hellip;">
+  <meta name="description" content="Python ElementTree如何处理xml文件中的注释 Dec 20th, 2013 | Comments 在用python的ElementTree处理xml文件的时候，有一个问题比较烦人： 当你的xml文件里有注释的时候，调用ElementTree.write() &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/">
+  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">添加新浪微博api接口的总结</h1>
+      <h1 class="entry-title">Python ElementTree如何处理xml文件中的注释</h1>
     
     
       <p class="meta">
@@ -99,7 +98,7 @@
   
 
 
-<time datetime="2013-10-15T15:00:00-07:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
+<time datetime="2013-12-20T02:25:00-08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,27 +107,45 @@
   </header>
 
 
-<div class="entry-content"><p>我的博客主要用了<a href="http://open.weibo.com">新浪微博开放平台</a>提供的三种api接口：分享按钮，微博发布窗，微博秀。
-<a href="http://open.weibo.com/widget/publisher.php">微博发布窗</a>和<a href="http://app.weibo.com/tool/weiboshow">微博秀</a>放在博客的asides里，代码由上面链接中自动提供，在<code>source/_include/asides/weibo.html</code>里加入即可。分享按钮的添加方式在<a href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/">上一篇博客</a>中有详细描述。</p>
+<div class="entry-content"><p>在用python的ElementTree处理xml文件的时候，有一个问题比较烦人：  <br/>
+当你的xml文件里有注释的时候，调用ElementTree.write()的时候会把注释去掉后保存，对于这种情况，需要加入以下代码进行处理：</p>
 
-<p>完成上述代码添加后，即可在博客界面上查看特定微博，发送微博，转发微博操作，但是这样会有一个问题，转发微博后展示页面左下方来源会显示<code>来自分享按钮</code>，发送微博后显示<code>来自未经审核应用</code>，这是因为新浪微博会为每个接入网站或者应用提供一个appkey，如果网站或者应用没有经过新浪的审核，则会有如上显示。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CommentParser</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">XMLTreeBuilder</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">ET</span><span class="o">.</span><span class="n">XMLTreeBuilder</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span class='line'>        <span class="c"># assumes ElementTree 1.2.X</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_parser</span><span class="o">.</span><span class="n">CommentHandler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_comment</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">handle_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">Comment</span><span class="p">,</span> <span class="p">{})</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">Comment</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">CommentParser</span><span class="p">())</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
 
-<p>解决这个问题的方法就是在<a href="http://open.weibo.com">新浪微博开放平台</a>中进行三步认证（手续极具中国特色，但相对来说新浪效率还是不错的），首先是填写开发者资料，各种个人信息和联系方式等，审核过了以后需要提供身份认证，主要就是上传身份证照片，提供身份证号，实名登记，哎~~，经过大致一天审核后，就可以添加自己的网站或应用了。在<a href="http://open.weibo.com/webmaster/add">添加新网站</a>界面填写信息，网站名称和域名，域名一定要是网站根域名，否则会给后面带来麻烦。另外需要在自己的界面中增加如下代码来经过审核：</p>
 
-<pre><code>&lt;meta property="wb:webmaster" content="xxxxxx" /&gt;
-</code></pre>
-
-<!--more-->
-
-
-<p>  <br/>
-完成上述步骤后，进入最后一步网站或者应用审核了，也是最麻烦的一步，由于国情的原因，除了填写网站名称，域名，介绍等基本信息，还需要提供ISP备案信息（damn it！），大部分人走到这步心里估计就放弃了，个人站点博客之类的哪儿会去备案呢，何况是VPS，虚拟云主机或者干脆是Github托管，不过新浪厚道的提供了一个选项，站点是国内还是国外的，国内的需要ISP备案，国外的话不需要备案信息，但是需要提供一个海外网站证明扫描件，开始一头雾水，不知到这个证明是什么，不过在<a href="http://open.weibo.com/qa">微博开放平台问答</a>搜索下，会发现其实只要提供一个国际顶级域名注册证书即可，比如(<a href="http://www.now.cn/domain/cer.net?IDDomain=11888448">http://www.now.cn/domain/cer.net?IDDomain=11888448</a>)，这个证书在申请域名的提供商那里可以获得，比如我在<a href="http://www.ename.com">易名中国</a>注册的域名，在域名管理页面中提供域名证书功能，直接截图上传审核即可。</p>
-
-<p>审核时间大致在大半天到一天左右，效率还是不错的，通过审核后，就正式可以接入微博了，在博客页面发布微博或者转发微博都会显示来源为XXX网站（名字为审核时填写的网站名称）。</p>
-
-<p>不过在放置分享按钮时出现点小问题，一直都只能显示来自分享按钮，无法显示来自xxx网站，后面提取url一点点的debug发现新浪自动生成的appkey是经过编码的，可能是因为安全或者其他考虑，没有显示appkey明文，但是编码过的appkey就会带来上述问题，必须将代码中的appkey改成明文才能带来预想效果。</p>
-
-<p>最后，如果你没有强迫症或者某种装X需要:),显示<code>来自未审核应用</code>也是可接受的，也就省去了上面麻烦令人崩溃的步骤。</p>
+<p>本质上就是在调用ElementTree.parser()的时候，传入处理comment的handler，方法其实就是ElementTree.Comment()，不知道什么时候ElementTree的版本能自己加入啊。</p>
 </div>
 
   <wb:share-button appkey="3368651352" addition="simple" type="button" ralateUid="1639057585"></wb:share-button>
@@ -155,12 +172,12 @@
   
 
 
-<time datetime="2013-10-15T15:00:00-07:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
+<time datetime="2013-12-20T02:25:00-08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/blog/'>blog</a>
+    <a class='category' href='/blog/categories/code/'>code</a>
   
 </span>
 
@@ -176,10 +193,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/10/14/ru-he-tian-jia-xin-lang-wei-bo-zhuan-fa-gong-neng/" title="Previous Post: 如何添加新浪微博转发功能">&laquo; 如何添加新浪微博转发功能</a>
+        <a class="basic-alignment left" href="/blog/2013/12/06/bi-jiao-geekde-strcmpshi-xian/" title="Previous Post: 比较geek的strcmp实现">&laquo; 比较geek的strcmp实现</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/10/25/code-tricks-1/" title="Next Post: 如何在宏定义中计算柔性数组元素大小">如何在宏定义中计算柔性数组元素大小 &raquo;</a>
       
     </p>
   </footer>
@@ -299,8 +314,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/';
-        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/10/15/tian-jia-xin-lang-wei-bo-apijie-kou-de-zong-jie/';
+        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/';
+        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[Jiang Kai's Blog]]></title>
   <link href="http://blog.jiang-kai.com/atom.xml" rel="self"/>
   <link href="http://blog.jiang-kai.com/"/>
-  <updated>2013-12-09T22:59:50-08:00</updated>
+  <updated>2013-12-20T02:31:09-08:00</updated>
   <id>http://blog.jiang-kai.com/</id>
   <author>
     <name><![CDATA[Jiang Kai]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[python ElementTree如何处理xml文件中的注释]]></title>
+    <link href="http://blog.jiang-kai.com/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/"/>
+    <updated>2013-12-20T02:25:00-08:00</updated>
+    <id>http://blog.jiang-kai.com/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi</id>
+    <content type="html"><![CDATA[<p>在用python的ElementTree处理xml文件的时候，有一个问题比较烦人：  <br/>
+当你的xml文件里有注释的时候，调用ElementTree.write()的时候会把注释去掉后保存，对于这种情况，需要加入以下代码进行处理：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CommentParser</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">XMLTreeBuilder</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">ET</span><span class="o">.</span><span class="n">XMLTreeBuilder</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span class='line'>        <span class="c"># assumes ElementTree 1.2.X</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_parser</span><span class="o">.</span><span class="n">CommentHandler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_comment</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">handle_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">Comment</span><span class="p">,</span> <span class="p">{})</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">Comment</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">CommentParser</span><span class="p">())</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本质上就是在调用ElementTree.parser()的时候，传入处理comment的handler，方法其实就是ElementTree.Comment()，不知道什么时候ElementTree的版本能自己加入啊。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[比较geek的strcmp实现]]></title>
