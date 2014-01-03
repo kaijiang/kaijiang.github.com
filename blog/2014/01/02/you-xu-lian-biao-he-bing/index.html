@@ -7,11 +7,27 @@
 <head>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3368651352" type="text/javascript" charset="utf-8"></script>
   <meta charset="utf-8">
-  <title>emacs缩进格式问题 - Jiang Kai's Blog</title>
+  <title>有序链表合并 - Jiang Kai's Blog</title>
   <meta name="author" content="Jiang Kai">
 
   
-  <meta name="description" content="Emacs缩进格式问题 Nov 1st, 2013 | Comments 各个编辑器之间最大的问题就是格式不统一，经常这边格式改的挺好，在另外一个编辑器里打开就又不对齐了，归结到最重要的一个问题就是TAB的不统一，有的编辑器默认TAB是4，有的是8，有的是6&hellip;. &hellip;">
+  <meta name="description" content="有序链表合并 Jan 2nd, 2014 | Comments 问题：
+两个有序单链表，现在需要实现这两个链表合并，并保证合并后的链表依然有序。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+node *list_emerge(node *head1, node * &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +36,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/">
+  <link rel="canonical" href="http://blog.jiang-kai.com/blog/2014/01/02/you-xu-lian-biao-he-bing/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +98,7 @@
   
   <header>
     
-      <h1 class="entry-title">Emacs缩进格式问题</h1>
+      <h1 class="entry-title">有序链表合并</h1>
     
     
       <p class="meta">
@@ -98,7 +114,7 @@
   
 
 
-<time datetime="2013-11-01T01:16:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+<time datetime="2014-01-02T23:21:00-08:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,21 +123,43 @@
   </header>
 
 
-<div class="entry-content"><p>各个编辑器之间最大的问题就是格式不统一，经常这边格式改的挺好，在另外一个编辑器里打开就又不对齐了，归结到最重要的一个问题就是TAB的不统一，有的编辑器默认TAB是4，有的是8，有的是6&hellip;.  <br/>
-解决这个问题的方法就是强制用空格来替代TAB，这样就解决了编辑器之间不统一的问题，只要同一种格式在各种编辑器打开都是统一风格了。  <br/>
-emacs解决这个问题的方法就是将<code>indent-tabs-mode</code>这个变量设置为无效就行。正确的设置方式如下:</p>
+<div class="entry-content"><p>问题：
+两个有序单链表，现在需要实现这两个链表合并，并保证合并后的链表依然有序。</p>
 
-<pre><code>(defconst mystyle
-  '(......)
-  "mystyle" )
-(c-add-style "mystyle" mystyle)
-(defun myhook()
-  (setq indent-tabs-mode nil)
-  (c-set-style "mystyle"))
-(add-hook 'c++-mode-hook 'myhook
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">node</span> <span class="o">*</span><span class="nf">list_emerge</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">head1</span><span class="p">,</span> <span class="n">node</span> <span class="o">*</span><span class="n">head2</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">node</span> <span class="o">**</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">node</span> <span class="o">*</span><span class="n">dummy</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">node</span><span class="p">));</span>
+</span><span class='line'>    <span class="n">node</span> <span class="o">*</span><span class="n">new</span> <span class="o">=</span> <span class="n">dummy</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="n">head1</span> <span class="o">&amp;&amp;</span> <span class="n">head2</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">head</span> <span class="o">=</span> <span class="n">head1</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">head2</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">?</span> <span class="o">&amp;</span><span class="n">head1</span> <span class="o">:</span> <span class="o">&amp;</span><span class="n">head2</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">new</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">new</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+</span><span class='line'>        <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">head</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">new</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">head1</span> <span class="o">?</span> <span class="n">head1</span> <span class="o">:</span> <span class="n">head2</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">new</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">free</span><span class="p">(</span><span class="n">dummy</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">new</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>改完后世界终于清净了！</p>
+
+<p>采用非递归方式实现，dummy的引入是方便确定头节点以及应对head1,head2可能为空的情况</p>
 </div>
 
   <wb:share-button appkey="3368651352" addition="simple" type="button" ralateUid="1639057585"></wb:share-button>
@@ -148,12 +186,12 @@ emacs解决这个问题的方法就是将<code>indent-tabs-mode</code>这个变�
   
 
 
-<time datetime="2013-11-01T01:16:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+<time datetime="2014-01-02T23:21:00-08:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/emacs/'>emacs</a>
+    <a class='category' href='/blog/categories/code/'>code</a>
   
 </span>
 
@@ -169,10 +207,8 @@ emacs解决这个问题的方法就是将<code>indent-tabs-mode</code>这个变�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/10/29/ru-he-jia-su-emacs-cscopecha-xun-su-du/" title="Previous Post: 如何加速emacs cscope查询速度">&laquo; 如何加速emacs cscope查询速度</a>
+        <a class="basic-alignment left" href="/blog/2013/12/20/python-elementtreeru-he-chu-li-xmlwen-jian-zhong-de-zhu-shi/" title="Previous Post: python ElementTree如何处理xml文件中的注释">&laquo; python ElementTree如何处理xml文件中的注释</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/12/06/lian-biao-fan-zhuan/" title="Next Post: 单链表反转">单链表反转 &raquo;</a>
       
     </p>
   </footer>
@@ -292,8 +328,8 @@ emacs解决这个问题的方法就是将<code>indent-tabs-mode</code>这个变�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/';
-        var disqus_url = 'http://blog.jiang-kai.com/blog/2013/11/01/emacssuo-jin-ge-shi-wen-ti/';
+        var disqus_identifier = 'http://blog.jiang-kai.com/blog/2014/01/02/you-xu-lian-biao-he-bing/';
+        var disqus_url = 'http://blog.jiang-kai.com/blog/2014/01/02/you-xu-lian-biao-he-bing/';
         var disqus_script = 'embed.js';
       
     (function () {

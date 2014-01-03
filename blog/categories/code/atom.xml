@@ -4,7 +4,7 @@
   <title><![CDATA[Category: code | Jiang Kai's Blog]]></title>
   <link href="http://blog.jiang-kai.com/blog/categories/code/atom.xml" rel="self"/>
   <link href="http://blog.jiang-kai.com/"/>
-  <updated>2013-12-20T02:31:09-08:00</updated>
+  <updated>2014-01-02T23:27:06-08:00</updated>
   <id>http://blog.jiang-kai.com/</id>
   <author>
     <name><![CDATA[Jiang Kai]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[有序链表合并]]></title>
+    <link href="http://blog.jiang-kai.com/blog/2014/01/02/you-xu-lian-biao-he-bing/"/>
+    <updated>2014-01-02T23:21:00-08:00</updated>
+    <id>http://blog.jiang-kai.com/blog/2014/01/02/you-xu-lian-biao-he-bing</id>
+    <content type="html"><![CDATA[<p>问题：
+两个有序单链表，现在需要实现这两个链表合并，并保证合并后的链表依然有序。
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">node</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">list_emerge</span><span class="p">(</span><span class="n">node</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">head1</span><span class="p">,</span> <span class="n">node</span> <span class="o">*</span><span class="n">head2</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">node</span> <span class="o">**</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'><span class="n">node</span> <span class="o">*</span><span class="n">dummy</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">node</span><span class="p">));</span>
+</span><span class='line'><span class="n">node</span> <span class="o">*</span><span class="n">new</span> <span class="o">=</span> <span class="n">dummy</span><span class="p">;</span>
+</span><span class='line'><span class="k">while</span> <span class="p">(</span><span class="n">head1</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">head2</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="p">(</span><span class="n">head</span> <span class="o">=</span> <span class="n">head1</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">value</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">head2</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">value</span> <span class="o">?</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">head1</span> <span class="o">:</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">head2</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">new</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">next</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">new</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">head</span><span class="p">)</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">next</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">new</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">next</span> <span class="o">=</span> <span class="n">head1</span> <span class="o">?</span> <span class="n">head1</span> <span class="o">:</span> <span class="n">head2</span><span class="p">;</span>
+</span><span class='line'><span class="n">new</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">next</span><span class="p">;</span>
+</span><span class='line'><span class="n">free</span><span class="p">(</span><span class="n">dummy</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span> <span class="n">new</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+采用非递归方式实现，dummy的引入是方便确定头节点以及应对head1,head2可能为空的情况</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[python ElementTree如何处理xml文件中的注释]]></title>
